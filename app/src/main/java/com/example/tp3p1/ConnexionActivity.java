@@ -20,15 +20,14 @@ public class ConnexionActivity extends AppCompatActivity {
     private TextInputEditText emailInput;
     private Pattern emailPattern;
 
-    private void inscription(Intent intent){
+    public void inscription(Intent intent){
         buttonCreationCompte = findViewById(R.id.buttonCreationCompte);
         buttonCreationCompte.setOnClickListener(v -> {
             startActivity(intent);
         });
     }
 
-
-    private boolean validatePwd(String pwd){
+    public boolean validatePwd(String pwd){
         return pwd.length() > 5;
     }
     private boolean validateEmail(String email){
