@@ -12,4 +12,5 @@
     <string name="regexForMail">^[A-Z0-9._%+-]+@[A-Z0-9.-]</string>
     <string name="noValideMail">Adresse Courriel non valide</string>
     <string name="noValidePwd">Le mot de passe doit contenir plus que 5 caractères</string>
+
 </resources>
