@@ -9,4 +9,7 @@
     <string name="strMessage"> Félicitations, vous gagnez aprés % d essais. Voulez-vous réessayer?</string>
     <string name="strYes">Oui</string>
     <string name="strNo">Non</string>
+    <string name="regexForMail">^[A-Z0-9._%+-]+@[A-Z0-9.-]</string>
+    <string name="noValideMail">Adresse Courriel non valide</string>
+    <string name="noValidePwd">Le mot de passe doit contenir plus que 5 caractères</string>
 </resources>
