@@ -7,8 +7,8 @@ public class DataInsertion {
     private DatabaseManager databaseManager;
 
     private void insertUsers(){
-        User u1 = new User("Aemir","Boulmerka","emirboulerka@gmail.com","CANADA");
-        User u2 = new User("Lawrence","Lefebvre","lawrenceLefebvre@gmail.com","FRANCE");
+        User u1 = new User("Aemir","Boulmerka","emirboulerka@gmail.com","12345","CANADA");
+        User u2 = new User("Lawrence","Lefebvre","lawrenceLefebvre@gmail.com","12345","FRANCE");
         databaseManager.insertUser(u1);
         databaseManager.insertUser(u2);
     }

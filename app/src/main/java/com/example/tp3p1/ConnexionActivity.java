@@ -10,14 +10,17 @@ import android.widget.Button;
 
 import com.example.tp3p1.database.DataInsertion;
 import com.example.tp3p1.database.DatabaseManager;
+import com.example.tp3p1.model.User;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ConnexionActivity extends AppCompatActivity {
 
     private Button buttonCreationCompte;
+    private Button buttonConnexion;
     private TextInputEditText pwdInput;
     private TextInputEditText emailInput;
     private Pattern emailPattern;
@@ -32,7 +35,7 @@ public class ConnexionActivity extends AppCompatActivity {
     }
 
     public boolean validatePwd(String pwd){
-        return pwd.length() > 5;
+        return pwd.length() >= 5;
     }
     private boolean validateEmail(String email){
         Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile(getResources().getString(R.string.regexForMail), Pattern.CASE_INSENSITIVE);
@@ -61,6 +64,21 @@ public class ConnexionActivity extends AppCompatActivity {
             }
         });
     }
+
+    private boolean checkIfUserExist(String emailUser, String pwdUser){
+        List<User> users = databaseManager.readUsers();
+        return users.stream().anyMatch(u -> u.getEmail().equals(emailUser) && u.getPwd().equals(pwdUser));
+    }
+
+    private void connexionToDbUser(Button cnxBtn, Intent intent){
+        cnxBtn.setOnClickListener((click)->{
+            String emailUser = emailInput.getText().toString();
+            String pwdUser = pwdInput.getText().toString();
+            if(checkIfUserExist(emailUser, pwdUser)){
+                startActivity(intent);
+            }
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +91,11 @@ public class ConnexionActivity extends AppCompatActivity {
         emailPattern  = Pattern.compile(getResources().getString(R.string.regexForMail));
         emailInput = findViewById(R.id.courrielInput);
         pwdInput = findViewById(R.id.pwdInput);
+        buttonConnexion = findViewById(R.id.buttonConnexion);
 
         watcherTxt(emailInput);
         watcherTxt(pwdInput);
+        connexionToDbUser(buttonConnexion, new Intent(this, MainActivity.class));
 
     }
 }

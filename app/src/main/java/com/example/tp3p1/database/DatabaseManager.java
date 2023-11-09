@@ -11,6 +11,8 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import java.util.List;
+
 public class DatabaseManager extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "Game.db";
@@ -54,6 +56,18 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
             Log.i( "DATABASE", "insertScore invoked" );
         } catch( Exception exception ) {
             Log.e( "DATABASE", "Can't insert score into Database", exception );
+        }
+    }
+
+    public List<User> readUsers() {
+        try {
+            Dao<User, Integer> dao = getDao(User.class );
+            List<User> users = dao.queryForAll();
+            Log.i( "DATABASE", "readScores invoked" );
+            return users;
+        } catch( Exception exception ) {
+            Log.e( "DATABASE", "Can't insert score into Database", exception );
+            return null;
         }
     }
 }
