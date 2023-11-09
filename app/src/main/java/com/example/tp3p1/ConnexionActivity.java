@@ -8,6 +8,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 
+import com.example.tp3p1.database.DataInsertion;
+import com.example.tp3p1.database.DatabaseManager;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.regex.Matcher;
@@ -19,6 +21,8 @@ public class ConnexionActivity extends AppCompatActivity {
     private TextInputEditText pwdInput;
     private TextInputEditText emailInput;
     private Pattern emailPattern;
+
+    private DatabaseManager databaseManager;
 
     public void inscription(Intent intent){
         buttonCreationCompte = findViewById(R.id.buttonCreationCompte);
@@ -61,6 +65,10 @@ public class ConnexionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connexion);
+
+        databaseManager = new DatabaseManager( this );
+        new DataInsertion(databaseManager);
+
         inscription(new Intent(this, InscriptionActivity.class));
         emailPattern  = Pattern.compile(getResources().getString(R.string.regexForMail));
         emailInput = findViewById(R.id.courrielInput);
