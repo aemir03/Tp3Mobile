@@ -81,4 +81,13 @@
         android:layout_alignRight="@+id/pgbScore"
         android:layout_alignEnd="@+id/pgbScore" />
 
+    <Button
+        android:id="@+id/scoreBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="53dp"
+        android:onClick="scoreClique"
+        android:text="SCORES" />
+
 </RelativeLayout>

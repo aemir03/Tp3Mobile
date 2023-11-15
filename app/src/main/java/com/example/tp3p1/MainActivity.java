@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -115,4 +116,14 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Pour afficher le score
+     * @param view
+     */
+    public void scoreClique(View view) {
+
+        Intent intent = new Intent(this, ScoreActivity.class);
+        startActivity(intent);
+
+    }
 }
