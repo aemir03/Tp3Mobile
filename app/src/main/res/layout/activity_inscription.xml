@@ -110,4 +110,15 @@
         app:layout_constraintStart_toEndOf="@+id/textViewPays"
         app:layout_constraintTop_toTopOf="@+id/textViewPays" />
 
+    <Button
+        android:id="@+id/creationCompteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="159dp"
+        android:layout_marginTop="63dp"
+        android:onClick="incription"
+        android:text="S'inscrire"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPays" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

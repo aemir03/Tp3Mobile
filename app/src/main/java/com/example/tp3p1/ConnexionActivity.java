@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.tp3p1.database.DataInsertion;
 import com.example.tp3p1.database.DatabaseManager;
@@ -37,12 +38,12 @@ public class ConnexionActivity extends AppCompatActivity {
     public boolean validatePwd(String pwd){
         return pwd.length() >= 5;
     }
-    private boolean validateEmail(String email){
+    public boolean validateEmail(String email){
         Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile(getResources().getString(R.string.regexForMail), Pattern.CASE_INSENSITIVE);
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
         return matcher.find();
     }
-    private void watcherTxt(TextInputEditText input){
+    public void watcherTxt(EditText input){
         input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

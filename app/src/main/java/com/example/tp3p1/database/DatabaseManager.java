@@ -53,7 +53,7 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
         try {
             Dao<User, Integer> dao = getDao(User.class);
             dao.create(user);
-            Log.i( "DATABASE", "insertScore invoked" );
+            Log.i( "DATABASE", "InsertUser invoked" );
         } catch( Exception exception ) {
             Log.e( "DATABASE", "Can't insert score into Database", exception );
         }

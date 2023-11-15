@@ -50,4 +50,9 @@ public class CustumPaysAdpter extends BaseAdapter {
         names.setText(paysNoms[i]);
         return view;
     }
+
+    @Override
+    public String toString() {
+        return "" + paysNoms;
+    }
 }
