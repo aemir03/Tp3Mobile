@@ -3,7 +3,7 @@ package com.example.tp3p1.database;
 import com.example.tp3p1.model.Score;
 import com.example.tp3p1.model.User;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class DataInsertion {
@@ -20,8 +20,8 @@ public class DataInsertion {
     }
 
     private void insertScores(){
-        Score s1 = new Score(u1, 5);
-        Score s2 = new Score(u2, 10);
+        Score s1 = new Score(u1, 5, new Date());
+        Score s2 = new Score(u2, 10, new Date());
         databaseManager.insertScore(s1);
         databaseManager.insertScore(s2);
     }

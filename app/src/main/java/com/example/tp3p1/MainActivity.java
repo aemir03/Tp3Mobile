@@ -14,6 +14,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import com.example.tp3p1.database.DatabaseManager;
+import com.example.tp3p1.model.Score;
+import com.example.tp3p1.model.User;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     private int searchedValue;
     private int score;
+    private User userActuel;
+    private DatabaseManager databaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         lblHistory = (TextView) findViewById( R.id.lblHistory );
 
         btnCompare.setOnClickListener( btnCompareListener );
+        databaseManager = new DatabaseManager( this );
 
         init();
 
@@ -53,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        String email = getIntent().getStringExtra("email");
+        userActuel = databaseManager.readUser(email);
         score = 0;
         searchedValue = 1 + (int) (Math.random() * 100);
         Log.i( "DEBUG", "Searched value : " + searchedValue );
@@ -71,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog retryAlert = new AlertDialog.Builder( this ).create();
         retryAlert.setTitle( R.string.app_name );
         retryAlert.setMessage( getString(R.string.strMessage, score ) );
+
+        // On ajoute le score a la bd
+        Score score1 = new Score(userActuel, score, new Date());
+        databaseManager.insertScore(score1);
 
         retryAlert.setButton( AlertDialog.BUTTON_POSITIVE, getString(R.string.strYes), new AlertDialog.OnClickListener() {
             @Override

@@ -25,8 +25,8 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
-            TableUtils.createTable( connectionSource, Score.class );
-            TableUtils.createTable( connectionSource, User.class );
+            TableUtils.createTableIfNotExists( connectionSource, Score.class );
+            TableUtils.createTableIfNotExists( connectionSource, User.class );
             Log.i( "DATABASE", "onCreate invoked" );
         } catch( Exception exception ) {
             Log.e( "DATABASE", "Can't create Database", exception );
@@ -79,7 +79,7 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
     public List<Score> readScoresOrderBy() {
         try {
             Dao<Score, Integer> dao = getDao(Score.class);
-            List<Score> scores = dao.queryBuilder().orderBy("nbEssais", false).query();
+            List<Score> scores = dao.queryBuilder().orderBy("nbEssais", true).query();
             Log.i("DATABASE", "readScores invoked");
             return scores;
         } catch (Exception exception) {
@@ -94,6 +94,23 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
             List<User> users = dao.queryForAll();
             Log.i( "DATABASE", "readScores invoked" );
             return users;
+        } catch( Exception exception ) {
+            Log.e( "DATABASE", "Can't insert score into Database", exception );
+            return null;
+        }
+    }
+
+    /**
+     * Pour lire l'utilisateur dans la database
+     * @param email
+     * @return
+     */
+    public User readUser(String email) {
+        try {
+            Dao<User, Integer> dao = getDao(User.class );
+            User user = dao.queryBuilder().where().eq("email", email).queryForFirst();
+            Log.i( "DATABASE", "readScores invoked" );
+            return user;
         } catch( Exception exception ) {
             Log.e( "DATABASE", "Can't insert score into Database", exception );
             return null;

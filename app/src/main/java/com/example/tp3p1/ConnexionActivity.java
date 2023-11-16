@@ -41,7 +41,7 @@ public class ConnexionActivity extends AppCompatActivity {
     public boolean validateEmail(String email){
         Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile(getResources().getString(R.string.regexForMail), Pattern.CASE_INSENSITIVE);
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
-        return matcher.find();
+        return true;
     }
     public void watcherTxt(EditText input){
         input.addTextChangedListener(new TextWatcher() {
@@ -76,6 +76,7 @@ public class ConnexionActivity extends AppCompatActivity {
             String emailUser = emailInput.getText().toString();
             String pwdUser = pwdInput.getText().toString();
             if(checkIfUserExist(emailUser, pwdUser)){
+                intent.putExtra("email", emailUser);
                 startActivity(intent);
             }
         });
@@ -86,7 +87,7 @@ public class ConnexionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_connexion);
 
         databaseManager = new DatabaseManager( this );
-        new DataInsertion(databaseManager);
+        //new DataInsertion(databaseManager);
 
         inscription(new Intent(this, InscriptionActivity.class));
         emailPattern  = Pattern.compile(getResources().getString(R.string.regexForMail));
