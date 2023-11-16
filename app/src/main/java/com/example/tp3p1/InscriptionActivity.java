@@ -74,7 +74,7 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
         String password = passwordText.getText().toString();
 
         if(prenom.isEmpty() || nom.isEmpty() || courriel.isEmpty() || paysActuel.isEmpty() || password.isEmpty() && !connexionActivity.validatePwd(password) && !connexionActivity.validateEmail(courriel)){
-            Toast.makeText(getApplicationContext(), "Veuillez remplir tous les champs", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.remplirChamps, Toast.LENGTH_LONG).show();
         }else{
 
             User user = new User(prenom, nom, courriel, password, paysActuel);
@@ -85,7 +85,7 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
                 Intent connexionIntent = new Intent(this, ConnexionActivity.class);
                 startActivity(connexionIntent);
             } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), "Erreur lors de l'inscription", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),R.string.erreurInsc, Toast.LENGTH_LONG).show();
             }
         }
     }

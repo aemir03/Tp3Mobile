@@ -1,6 +1,7 @@
 package com.example.tp3p1.adapters;
 
 import android.content.Context;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,9 @@ public class UserAdapter extends BaseAdapter {
         Score score = scores.get(position);
 
         // Définir les valeurs dans les TextView
-        drapeauView.setText(score.getUser().getPays());
+        SpannableString spannableString = new SpannableString(score.getUser().getPays());
+        spannableString.setSpan(new android.text.style.ForegroundColorSpan(android.graphics.Color.RED), 0, spannableString.length(), 0);
+        drapeauView.setText(spannableString);
         prenomView.setText(score.getUser().getFirstName());
         nomView.setText(score.getUser().getLastName());
         scoreView.setText(String.valueOf(score.getNbEssais()));
