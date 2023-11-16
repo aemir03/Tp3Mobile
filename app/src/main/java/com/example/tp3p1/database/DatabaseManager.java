@@ -25,7 +25,7 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
-            //TableUtils.createTable( connectionSource, Score.class );
+            TableUtils.createTable( connectionSource, Score.class );
             TableUtils.createTable( connectionSource, User.class );
             Log.i( "DATABASE", "onCreate invoked" );
         } catch( Exception exception ) {
@@ -38,7 +38,6 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.dropTable( connectionSource, Score.class, true );
             TableUtils.dropTable( connectionSource, User.class, true );
-            onCreate( database, connectionSource);
             Log.i( "DATABASE", "onUpgrade invoked" );
         } catch( Exception exception ) {
             Log.e( "DATABASE", "Can't upgrade Database", exception );
@@ -56,6 +55,36 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
             Log.i( "DATABASE", "InsertUser invoked" );
         } catch( Exception exception ) {
             Log.e( "DATABASE", "Can't insert score into Database", exception );
+        }
+    }
+
+    /**
+     * Pour inserer le score dans la database
+     * @param score
+     */
+    public void insertScore(Score score) {
+        try {
+            Dao<Score, Integer> dao = getDao(Score.class);
+            dao.createOrUpdate(score);
+            Log.i("DATABASE", "InsertScore invoked");
+        } catch (Exception exception) {
+            Log.e("DATABASE", "Can't insert score into Database", exception);
+        }
+    }
+
+    /**
+     * Pour lire les scores dans la database dans l'ordre decroissant
+     * @return
+     */
+    public List<Score> readScoresOrderBy() {
+        try {
+            Dao<Score, Integer> dao = getDao(Score.class);
+            List<Score> scores = dao.queryBuilder().orderBy("nbEssais", false).query();
+            Log.i("DATABASE", "readScores invoked");
+            return scores;
+        } catch (Exception exception) {
+            Log.e("DATABASE", "Can't insert score into Database", exception);
+            return null;
         }
     }
 

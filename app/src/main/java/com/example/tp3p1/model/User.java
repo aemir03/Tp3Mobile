@@ -1,9 +1,7 @@
 package com.example.tp3p1.model;
 
-
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import java.util.Date;
 
 
 @DatabaseTable( tableName = "T_User" )
@@ -37,6 +35,14 @@ public class User {
         this.email = email;
         this.pwd = pwd;
         this.pays = pays;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public String getFirstName() {
